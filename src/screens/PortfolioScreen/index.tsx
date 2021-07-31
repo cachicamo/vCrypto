@@ -30,24 +30,84 @@ const portfolioCoins = [
     amount: 5.34,
     valueUSD: 69420.99
   },
+  {
+    id: '4',
+    name: 'Ethereum',
+    symbol: 'ETH',
+    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
+    amount: 5.34,
+    valueUSD: 69420.99
+  },
+  {
+    id: '5',
+    name: 'Ethereum',
+    symbol: 'ETH',
+    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
+    amount: 5.34,
+    valueUSD: 69420.99
+  },
+  {
+    id: '6',
+    name: 'Ethereum',
+    symbol: 'ETH',
+    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
+    amount: 5.34,
+    valueUSD: 69420.99
+  },
+  {
+    id: '7',
+    name: 'Ethereum',
+    symbol: 'ETH',
+    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
+    amount: 5.34,
+    valueUSD: 69420.99
+  },
+  {
+    id: '8',
+    name: 'Ethereum',
+    symbol: 'ETH',
+    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
+    amount: 5.34,
+    valueUSD: 69420.99
+  },
+  {
+    id: '9',
+    name: 'Ethereum',
+    symbol: 'ETH',
+    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
+    amount: 5.34,
+    valueUSD: 69420.99
+  },
+  {
+    id: '10',
+    name: 'Ethereum',
+    symbol: 'ETH',
+    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
+    amount: 5.34,
+    valueUSD: 69420.99
+  },
 ];
 
 const PortfolioScreen = () => {
   return (
     <View style={styles.root}>
-      <Image style={styles.image} source={image} />
-      <View style={styles.balanceContainer}>
-        <Text style={styles.label} >Portfolio balance</Text>
-        <Text style={styles.balance} >$69,420</Text>
-      </View>
 
       <FlatList 
         style={{width: '100%'}}
         data={portfolioCoins}
         renderItem={({item}) => <PortfolioCoin portfolioCoin={item} />}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponentStyle={{alignItems: 'center'}}
+        ListHeaderComponent={() => (
+          <>
+            <Image style={styles.image} source={image} />
+            <View style={styles.balanceContainer}>
+              <Text style={styles.label} >Portfolio balance</Text>
+              <Text style={styles.balance} >$69,420</Text>
+            </View>
+          </>
+        )}
       />
-        
-     
     </View>
   )
 }
