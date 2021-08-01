@@ -2,11 +2,10 @@ import React, { useState } from 'react'
 import { View, Text, Image, Pressable } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 
-const image = require('../../assets/images/Saly-1.png');
-
 import styles from './styles';
 import PercentageChange from '../../components/PercentageChange';
 import CoinPriceGraph from '../../components/CoinPriceGraph';
+import { useNavigation } from '@react-navigation/native';
 
 const historyString = JSON.stringify([
   47222.9831719397,
@@ -183,7 +182,7 @@ const historyString = JSON.stringify([
 const CoinDetailsScreen = () => {
   const [coinData, setCoinData] = useState({
     id: '1',
-    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
+    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg',
     name: 'Ethereum',
     symbol: 'ETH',
     valueChange1H: -2.23,
@@ -193,15 +192,18 @@ const CoinDetailsScreen = () => {
     amount: 1.23,
   })
 
+  const navigation = useNavigation();
+
   const onStarPress = () => {
     console.warn('Add to Watch list');
   }
 
   const onBuy = () => {
-    console.warn('Buy Coin');
+    navigation.navigate('CoinExchange', { isBuy: true, coinData });
   }
   const onSell = () => {
-    console.warn('Sell Position');
+    navigation.navigate('CoinExchange', { isBuy: false, coinData });
+
   }
 
   return (
@@ -244,7 +246,7 @@ const CoinDetailsScreen = () => {
         </View>
       </View>
 
-      <CoinPriceGraph dataString={historyString}/>
+      <CoinPriceGraph dataString={historyString} />
 
       <View style={styles.row}>
         <Text>Position</Text>
