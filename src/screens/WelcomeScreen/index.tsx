@@ -22,14 +22,19 @@ const WelcomeScreen = () => {
       <Text style={styles.title} >Welcome to VCrypto</Text>
       <Text style={styles.subtitle}>Invest your virtual $100,000</Text>
       <Text style={styles.subtitle}>and compete with others</Text>
+      <View style={styles.buttonContainer}>
+        <View style={styles.providerContainer}>
+          <Pressable onPress={signInApple}>
+            <Image style={styles.providerImage} source={appleImage} />
+          </Pressable>
+        </View>
 
-      <Pressable onPress={signInApple} style={styles.appleButton}>
-        <Image style={styles.googleImage} source={appleImage} />
-      </Pressable>
-
-      <Pressable onPress={signInGoogle} style={styles.googleButton}>
-        <Image style={styles.googleImage} source={googleImage} />
-      </Pressable>
+        <View style={styles.providerContainer}>
+          <Pressable onPress={signInGoogle}>
+            <Image style={styles.providerImage} source={googleImage} />
+          </Pressable>
+        </View>
+      </View>
     </View>
   )
 }

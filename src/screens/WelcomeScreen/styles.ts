@@ -22,18 +22,20 @@ const styles = StyleSheet.create({
     fontSize:20,
     color: '#707070',
   },
-  appleButton: {
+  buttonContainer: {
+    padding: 20,
     marginTop: 50,
+    alignItems: 'center',
+    backgroundColor: 'white',
   },
-  googleButton: {
-    marginBottom: 10,
-  },
-  googleImage: {
-    height: 100,
-    width: 220,
+  providerImage: {
+    height: 50,
+    width: 240,
     resizeMode: 'contain',
-    backgroundColor: 'white'
   },
+  providerContainer: {
+    marginVertical: 20,
+  }
 });
 
 export default styles;
