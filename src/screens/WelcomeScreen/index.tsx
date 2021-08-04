@@ -1,5 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, Image, Pressable } from 'react-native'
+import {Auth, Hub} from 'aws-amplify';
+import { CommonActions, useNavigation } from '@react-navigation/native';
+
+
 const image = require('../../assets/images/Saly-1.png');
 const googleImage = require('../../assets/images/google-button.png');
 const appleImage = require('../../assets/images/apple-button.png');
@@ -7,14 +11,53 @@ const appleImage = require('../../assets/images/apple-button.png');
 import styles from './styles';
 
 const WelcomeScreen = () => {
+  const navigation = useNavigation();
 
-  const signInGoogle = () => {
-    console.warn('Sign in Google')
+useEffect(() => {
+  const fetchUser = async () => {
+    const user = await Auth.currentAuthenticatedUser();
+    console.log('here')
+    if(user) {
+      console.log('user Data')
+      console.log(user.payload)
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            { name: 'Home' },
+          ]
+        })
+      );
+    }
+  }
+  
+  fetchUser();
+}, []);
+
+useEffect(() => {
+  Hub.listen("auth", ({ payload: { event, data } }) => {
+    if(event === "signIn"){
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            { name: 'Home' },
+          ]
+        })
+      );
+    }
+  });
+  }, [])
+  
+
+  const signInGoogle = async () => {
+    await Auth.federatedSignIn({ provider: "Google" });
   };
 
   const signInApple = () => {
     console.warn('Sign in Apple')
   };
+
 
   return (
     <View style={styles.root}>

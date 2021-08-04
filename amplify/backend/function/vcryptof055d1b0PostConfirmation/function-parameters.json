@@ -1,0 +1,17 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "vcryptof055d1b0",
+  "functionName": "vcryptof055d1b0PostConfirmation",
+  "resourceName": "vcryptof055d1b0PostConfirmation",
+  "parentStack": "auth",
+  "triggerEnvs": "[]",
+  "triggerDir": "/usr/local/lib/node_modules/@aws-amplify/cli/node_modules/amplify-category-auth/provider-utils/awscloudformation/triggers/PostConfirmation",
+  "triggerTemplate": "PostConfirmation.json.ejs",
+  "triggerEventPath": "PostConfirmation.event.json",
+  "roleName": "vcryptof055d1b0PostConfirmation",
+  "skipEdit": true,
+  "enableCors": false
+}
