@@ -34,6 +34,9 @@ const styles = StyleSheet.create({
   textInput: {
 
   },
+  row: {
+    marginTop: 'auto',
+  },
   inputsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginHorizontal: 10,
-  }
+  },
 });
 
 export default styles;

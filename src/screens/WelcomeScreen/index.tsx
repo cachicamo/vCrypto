@@ -13,40 +13,41 @@ import styles from './styles';
 const WelcomeScreen = () => {
   const navigation = useNavigation();
 
-useEffect(() => {
-  const fetchUser = async () => {
-    const user = await Auth.currentAuthenticatedUser();
-    console.log('here')
-    if(user) {
-      console.log('user Data')
-      console.log(user.payload)
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [
-            { name: 'Home' },
-          ]
-        })
-      );
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const user = await Auth.currentAuthenticatedUser();
+        if(user) {
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              { name: 'Home' },
+            ]
+          })
+        );
+      }
+      } catch (e) {
+        console.log('No User Logged In')
+      }
     }
-  }
-  
-  fetchUser();
-}, []);
+    
+    fetchUser();
+  }, []);
 
-useEffect(() => {
-  Hub.listen("auth", ({ payload: { event, data } }) => {
-    if(event === "signIn"){
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [
-            { name: 'Home' },
-          ]
-        })
-      );
-    }
-  });
+  useEffect(() => {
+    Hub.listen("auth", ({ payload: { event, data } }) => {
+      if(event === "signIn"){
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              { name: 'Home' },
+            ]
+          })
+        );
+      }
+    });
   }, [])
   
 
@@ -57,7 +58,6 @@ useEffect(() => {
   const signInApple = () => {
     console.warn('Sign in Apple')
   };
-
 
   return (
     <View style={styles.root}>

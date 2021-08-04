@@ -11,17 +11,25 @@ exports.handler = async (event, context) => {
   // Save the user to DynamoDB
   const date = new Date();
 
+  const Item = {
+    id: {S: event.request.userAttributes.sub},
+    __typename: {S: 'User'},
+    email: {S: event.request.userAttributes.email},
+    netWorth: {N: "100000.0"},
+    createdAt: {S: date.toISOString()},
+    updatedAt: {S: date.toISOString()},
+  }
+
+  if(event.request.userAttributes.picture) {
+    Item.image = {S: event.request.userAttributes.picture};
+  }
+
+  if(event.request.userAttributes.name) {
+    Item.name = {S: event.request.userAttributes.name};
+  }
+
   const params = {
-    Item: {
-      id: {S: event.request.userAttributes.sub},
-      __typename: {S: 'User'},
-      email: {S: event.request.userAttributes.email},
-      name: {S: event.request.userAttributes.name},
-      image: {S: event.request.userAttributes.picture},
-      netWorth: {N: "100000.0"},
-      createdAt: {S: date.toISOString()},
-      updatedAt: {S: date.toISOString()},
-    },
+    Item,
     TableName: process.env.USERTABLE,
   };
 

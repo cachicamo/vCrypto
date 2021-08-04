@@ -24,6 +24,7 @@ const CoinExchangeScreen = () => {
     setCoinUSDValue('');
     setToUSD(true);
     setToCoin(true);
+    hideKeyboard();
   };
 
   const hideKeyboard = () => {
@@ -130,17 +131,24 @@ const CoinExchangeScreen = () => {
         </View>
       </View>
       <View style={styles.maxValue}>
-        <Pressable onPress={onClear} style={styles.clearButton}>
+        {(coinAmount.length > 0) && (
+           <Pressable onPress={onClear} style={styles.clearButton}>
           <Text>Clear</Text>
         </Pressable>
+        )}
+        {!(coinAmount.length > 0) && (
+          <View></View>
+        )}
+       
         <Text>Max. {isBuy ? maxUSD : coinData.amount}</Text>
       </View>
-      <View style={[styles.row, {marginTop: 'auto'}]}>
-
-      <Pressable onPress={onPlaceOrder} style={styles.button}>
-        <Text style={styles.buttonText}>Place Order</Text>
-      </Pressable>
-      </View>
+      {(coinAmount.length > 0) && (
+        <View style={styles.row}>
+          <Pressable onPress={onPlaceOrder} style={styles.button}>
+            <Text style={styles.buttonText}>Place Order</Text>
+          </Pressable>
+        </View>
+      )}
     </KeyboardAvoidingView>
   )
 }
