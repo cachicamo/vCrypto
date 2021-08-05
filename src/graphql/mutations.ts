@@ -13,6 +13,17 @@ export const createUser = /* GraphQL */ `
       name
       image
       netWorth
+      porfolioCoins {
+        items {
+          id
+          amount
+          userId
+          coinId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -29,6 +40,17 @@ export const updateUser = /* GraphQL */ `
       name
       image
       netWorth
+      porfolioCoins {
+        items {
+          id
+          amount
+          userId
+          coinId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -45,6 +67,17 @@ export const deleteUser = /* GraphQL */ `
       name
       image
       netWorth
+      porfolioCoins {
+        items {
+          id
+          amount
+          userId
+          coinId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }

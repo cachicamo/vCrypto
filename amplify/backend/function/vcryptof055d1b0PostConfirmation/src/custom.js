@@ -30,10 +30,8 @@ exports.handler = async (event, context) => {
 
   const params = {
     Item,
-    TableName: process.env.USERTABLE,
+    TableName: process.env.USERTABLE, //env variable in lambda
   };
-
-  // Give user $100000
 
   try {
     await ddb.putItem(params).promise();
@@ -41,5 +39,27 @@ exports.handler = async (event, context) => {
   } catch (e) {
     console.log('Error', e);
   }
-  context.done(null, event);
+
+  // Give user $100000
+  const PortfolioCoinItem = {
+    id: {S: `${event.request.userAttributes.sub}-usd`},
+    __typename: {S: 'PortfolioCoin'},
+    'userId': {S: event.request.userAttributes.sub},
+    amount: {N: "100000.0"},
+    'coinId': { S: process.env.USD_COIN_ID}, //env variable in lambda
+    createdAt: {S: date.toISOString()},
+    updatedAt: {S: date.toISOString()}
+  }
+
+  try {
+    await ddb.putItem({
+      Item: PortfolioCoinItem,
+      TableName: process.env.PORTFOLIO_COIN_TABLE, //env variable in lambda
+    }).promise();
+    console.log('Success');
+  } catch (e) {
+    console.log('Error', e);
+  }
+ 
+  // context.done(null, event);
 };

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { View, Text, Image, Pressable } from 'react-native'
 import {Auth, Hub} from 'aws-amplify';
 import { CommonActions, useNavigation } from '@react-navigation/native';
+import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
 
 
 const image = require('../../assets/images/Saly-1.png');
@@ -28,7 +29,7 @@ const WelcomeScreen = () => {
         );
       }
       } catch (e) {
-        console.log('No User Logged In')
+        // console.log('No User Logged In')
       }
     }
     
@@ -52,7 +53,8 @@ const WelcomeScreen = () => {
   
 
   const signInGoogle = async () => {
-    await Auth.federatedSignIn({ provider: "Google" });
+    // await Auth.federatedSignIn({ provider: "Google" });
+    await Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google});
   };
 
   const signInApple = () => {
