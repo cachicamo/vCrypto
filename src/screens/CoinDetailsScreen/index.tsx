@@ -219,7 +219,9 @@ const CoinDetailsScreen = () => {
           }
         },
       },));
-      setPortfolioCoin(response.data.listPortfolioCoins.items[0].amount)
+      if(response.data.listPortfolioCoins.items.length > 0) {
+        setPortfolioCoin(response.data.listPortfolioCoins.items[0])
+      }
     } catch (e) {
       console.error(e);
     }
@@ -286,14 +288,15 @@ const CoinDetailsScreen = () => {
         </View>
       </View>
 
-      <CoinPriceGraph dataString={historyString} />
+      {coin?.priceHistoryString && 
+        <CoinPriceGraph dataString={coin?.priceHistoryString} /> }
 
       <View style={styles.row}>
         <Text>Position</Text>
         <Text>
-          {coin.symbol} {coin.amount}
+          {coin.symbol} {portfolioCoin?.amount || 0}
           {' '}
-          (${(portfolioCoin * coin.currentPrice).toFixed(2)})
+          (${(coin.currentPrice * portfolioCoin?.amount || 0).toFixed(2)})
         </Text>
       </View>
       <View style={[styles.row, {marginTop: 'auto'}]}>
