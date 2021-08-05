@@ -288,8 +288,8 @@ const CoinDetailsScreen = () => {
         </View>
       </View>
 
-      {coin?.priceHistoryString && 
-        <CoinPriceGraph dataString={coin?.priceHistoryString} /> }
+      {coin.priceHistoryString && 
+        <CoinPriceGraph dataString={coin.priceHistoryString} /> }
 
       <View style={styles.row}>
         <Text>Position</Text>
