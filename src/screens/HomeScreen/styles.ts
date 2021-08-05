@@ -23,6 +23,10 @@ const styles = StyleSheet.create({
     fontSize:20,
     color: '#707070',
   },
+  username: {
+    fontSize:20,
+    marginBottom: 15,
+  },
 });
 
 export default styles;
