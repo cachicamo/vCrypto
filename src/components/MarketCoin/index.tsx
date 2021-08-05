@@ -19,6 +19,7 @@ export interface MarketCoinProps {
 const MarketCoin = (props: MarketCoinProps) => {
   const {
     marketCoin: {
+      id,
       image, 
       name, 
       symbol, 
@@ -30,7 +31,7 @@ const MarketCoin = (props: MarketCoinProps) => {
   const navigation = useNavigation();
 
   return (
-    <Pressable onPress={() => navigation.navigate('CoinDetails')} style={styles.root}>
+    <Pressable onPress={() => navigation.navigate('CoinDetails', { id })} style={styles.root}>
       <View style={styles.leftContainer}>
         <Image style={styles.image} source={{uri: image}} />
         <View>

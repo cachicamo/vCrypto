@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { View, Text, Image, Pressable } from 'react-native'
 import {Auth, Hub} from 'aws-amplify';
 import { CommonActions, useNavigation } from '@react-navigation/native';
@@ -10,22 +10,25 @@ const googleImage = require('../../assets/images/google-button.png');
 const appleImage = require('../../assets/images/apple-button.png');
 
 import styles from './styles';
+import AppContext from '../../utils/AppContext';
 
 const WelcomeScreen = () => {
   const navigation = useNavigation();
+  const {userId, setUserId} = useContext(AppContext);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const user = await Auth.currentAuthenticatedUser();
         if(user) {
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [
-              { name: 'Home' },
-            ]
-          })
+          setUserId(user.signInUserSession.accessToken.payload.sub);
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [
+                { name: 'Home' },
+              ]
+            })
         );
       }
       } catch (e) {
@@ -39,6 +42,7 @@ const WelcomeScreen = () => {
   useEffect(() => {
     Hub.listen("auth", ({ payload: { event, data } }) => {
       if(event === "signIn"){
+        setUserId(data.signInUserSession.accessToken.payload.sub);
         navigation.dispatch(
           CommonActions.reset({
             index: 0,

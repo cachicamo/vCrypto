@@ -18,6 +18,7 @@ export interface PortfolioCoinProps {
 const PortfolioCoin = (props: PortfolioCoinProps) => {
   const {
     portfolioCoin: {
+      id,
       image, 
       name, 
       symbol, 
@@ -29,7 +30,7 @@ const PortfolioCoin = (props: PortfolioCoinProps) => {
   const navigation = useNavigation();
 
   return (
-    <Pressable onPress={() => navigation.navigate('CoinDetails')} style={styles.root}>
+    <Pressable onPress={() => navigation.navigate('CoinDetails', { id })} style={styles.root}>
       <View style={styles.leftContainer}>
         <Image style={styles.image} source={{uri: image}} />
         <View>

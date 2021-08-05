@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from 'aws-amplify';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Image, FlatList } from 'react-native'
 import PortfolioCoin from '../../components/PortfolioCoin';
 import { listCoins } from '../../graphql/queries';
@@ -92,21 +92,31 @@ import styles from './styles'
 
 const PortfolioScreen = () => {
   const [coins, setCoins] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchCoins = async () => {
     try {
+      setLoading(true);
       const response = await API.graphql(graphqlOperation(listCoins));
-      console.log(response);
+      setCoins(response.data.listCoins.items);
     } catch (e) {
       console.error(e);
     }
+    setLoading(false);
   }
+
+  useEffect(() => {
+    fetchCoins();
+  }, []);
+  
   return (
     <View style={styles.root}>
 
       <FlatList 
         style={{width: '100%'}}
         data={coins}
+        onRefresh={fetchCoins}
+        refreshing={loading}
         renderItem={({item}) => <PortfolioCoin portfolioCoin={item} />}
         showsVerticalScrollIndicator={false}
         ListHeaderComponentStyle={{alignItems: 'center'}}
