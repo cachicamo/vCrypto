@@ -19,8 +19,6 @@ const CoinExchangeScreen = () => {
   const [usdPortfolioCoin, setUsdPortfolioCoin] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   
-  //TODO fetch from API
-  // const maxUSD = 100000;
   const navigation = useNavigation();
 
   const { userId } = useContext(AppContext);
@@ -45,11 +43,11 @@ const CoinExchangeScreen = () => {
   };
 
   const onSellAll = () => {
-    setCoinAmount(portfolioCoin.amount);
+    setCoinAmount((portfolioCoin.amount).toString());
   }
 
   const onBuyAll = () => {
-    setCoinUSDValue(usdPortfolioCoin?.amount || 0);
+    setCoinUSDValue(((usdPortfolioCoin?.amount).toString()) || 0);
   }
 
   const onPlaceOrder = async () => {
@@ -217,7 +215,7 @@ const CoinExchangeScreen = () => {
           <View></View>
         )}
        {console.log('max:',coin)}
-        <Text>Max. {isBuy ? usdPortfolioCoin?.amount : portfolioCoin.amount || 0}</Text>
+        <Text>Max. {isBuy ? usdPortfolioCoin?.amount : portfolioCoin.amount.toFixed(8) || 0}</Text>
       </View>
       {isBuy ? (
         <Pressable onPress={onBuyAll}>

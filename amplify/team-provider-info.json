@@ -22,10 +22,6 @@
           "deploymentBucketName": "amplify-vcrypto-dev-75713-deployment",
           "s3Key": "amplify-builds/vcryptof055d1b0PostConfirmation-59307675614a66736f55-build.zip"
         },
-        "ExchangeCoins": {
-          "deploymentBucketName": "amplify-vcrypto-dev-75713-deployment",
-          "s3Key": "amplify-builds/ExchangeCoins-713854587843354e4e74-build.zip"
-        },
         "exchangeMyCoin": {
           "deploymentBucketName": "amplify-vcrypto-dev-75713-deployment",
           "s3Key": "amplify-builds/exchangeMyCoin-34437370365452596c69-build.zip"
