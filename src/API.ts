@@ -165,16 +165,16 @@ export type ModelPortfolioCoinFilterInput = {
   not?: ModelPortfolioCoinFilterInput | null,
 };
 
-export type ExchangeCoinsMutationVariables = {
+export type ExchangeMyCoinMutationVariables = {
   coinId?: string | null,
   isBuy: boolean,
   amount: number,
-  usdPortfolioCoinId?: string | null,
+  usdPortfolioCoinId: string,
   coinPortfolioCoinId?: string | null,
 };
 
-export type ExchangeCoinsMutation = {
-  ExchangeCoins: boolean,
+export type ExchangeMyCoinMutation = {
+  exchangeMyCoin: boolean,
 };
 
 export type GetUserQueryVariables = {

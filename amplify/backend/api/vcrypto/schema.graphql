@@ -35,11 +35,11 @@ type PortfolioCoin
 }
 
 type Mutation {
-  ExchangeCoins(
-    coinId: ID, 
-    isBuy: Boolean!, 
-    amount: Float!,
-    usdPortfolioCoinId: ID
+  exchangeMyCoin(
+    coinId: ID 
+    isBuy: Boolean!
+    amount: Float!
+    usdPortfolioCoinId: ID!
     coinPortfolioCoinId: ID
-  ): Boolean! @function(name: "ExchangeCoins-${env}")
+  ): Boolean! @function(name: "exchangeMyCoin-${env}")
 }

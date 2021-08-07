@@ -23,6 +23,10 @@ const PortfolioScreen = () => {
         { id: userId}
       ));
       setPortfolioCoins(response.data.getUser.porfolioCoins.items);
+      portfolioCoins.map((item) => {
+        // console.log('portfolio screen')
+        // console.log(item)
+      })
       setBalance(response.data.getUser.netWorth);
     } catch (e) {
       console.error(e);
