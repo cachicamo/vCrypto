@@ -1,104 +1,29 @@
-import { API, graphqlOperation } from 'aws-amplify';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { View, Text, Image, FlatList } from 'react-native'
+import { API, graphqlOperation } from 'aws-amplify';
+
+import { getUserPortfolio } from './queries';
 import PortfolioCoin from '../../components/PortfolioCoin';
-import { listCoins } from '../../graphql/queries';
 const image = require('../../assets/images/Saly-10.png');
 
 import styles from './styles'
-
-// const portfolioCoins = [
-//   {
-//     id: '1',
-//     name: 'Virtual Dollars',
-//     symbol: 'USD',
-//     image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/1.jpg',
-//     amount: 69420,
-//     valueUSD: 69420
-//   },
-//   {
-//     id: '2',
-//     name: 'Bitcoin',
-//     symbol: 'BTC',
-//     image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/5.jpg',
-//     amount: 1.12,
-//     valueUSD: 3420
-//   },
-//   {
-//     id: '3',
-//     name: 'Ethereum',
-//     symbol: 'ETH',
-//     image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
-//     amount: 5.34,
-//     valueUSD: 69420.99
-//   },
-//   {
-//     id: '4',
-//     name: 'Ethereum',
-//     symbol: 'ETH',
-//     image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
-//     amount: 5.34,
-//     valueUSD: 69420.99
-//   },
-//   {
-//     id: '5',
-//     name: 'Ethereum',
-//     symbol: 'ETH',
-//     image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
-//     amount: 5.34,
-//     valueUSD: 69420.99
-//   },
-//   {
-//     id: '6',
-//     name: 'Ethereum',
-//     symbol: 'ETH',
-//     image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
-//     amount: 5.34,
-//     valueUSD: 69420.99
-//   },
-//   {
-//     id: '7',
-//     name: 'Ethereum',
-//     symbol: 'ETH',
-//     image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
-//     amount: 5.34,
-//     valueUSD: 69420.99
-//   },
-//   {
-//     id: '8',
-//     name: 'Ethereum',
-//     symbol: 'ETH',
-//     image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
-//     amount: 5.34,
-//     valueUSD: 69420.99
-//   },
-//   {
-//     id: '9',
-//     name: 'Ethereum',
-//     symbol: 'ETH',
-//     image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
-//     amount: 5.34,
-//     valueUSD: 69420.99
-//   },
-//   {
-//     id: '10',
-//     name: 'Ethereum',
-//     symbol: 'ETH',
-//     image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/8.png',
-//     amount: 5.34,
-//     valueUSD: 69420.99
-//   },
-// ];
+import AppContext from '../../utils/AppContext';
 
 const PortfolioScreen = () => {
-  const [coins, setCoins] = useState([]);
+  const [balance, setBalance] = useState(0);
+  const [portfolioCoins, setPortfolioCoins] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { userId } = useContext(AppContext);
 
-  const fetchCoins = async () => {
+  const fetchPortfolio = async () => {
     try {
       setLoading(true);
-      const response = await API.graphql(graphqlOperation(listCoins));
-      setCoins(response.data.listCoins.items);
+      const response = await API.graphql(graphqlOperation(
+        getUserPortfolio,
+        { id: userId}
+      ));
+      setPortfolioCoins(response.data.getUser.porfolioCoins.items);
+      setBalance(response.data.getUser.netWorth);
     } catch (e) {
       console.error(e);
     }
@@ -106,7 +31,7 @@ const PortfolioScreen = () => {
   }
 
   useEffect(() => {
-    fetchCoins();
+    fetchPortfolio();
   }, []);
   
   return (
@@ -114,8 +39,8 @@ const PortfolioScreen = () => {
 
       <FlatList 
         style={{width: '100%'}}
-        data={coins}
-        onRefresh={fetchCoins}
+        data={portfolioCoins}
+        onRefresh={fetchPortfolio}
         refreshing={loading}
         renderItem={({item}) => <PortfolioCoin portfolioCoin={item} />}
         showsVerticalScrollIndicator={false}
@@ -125,7 +50,7 @@ const PortfolioScreen = () => {
             <Image style={styles.image} source={image} />
             <View style={styles.balanceContainer}>
               <Text style={styles.label} >Portfolio balance</Text>
-              <Text style={styles.balance} >$69,420</Text>
+              <Text style={styles.balance} >${balance}</Text>
             </View>
           </>
         )}

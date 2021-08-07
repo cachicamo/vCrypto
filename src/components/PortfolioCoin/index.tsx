@@ -6,24 +6,29 @@ import styles from './styles'
 
 export interface PortfolioCoinProps {
   portfolioCoin: {
-    id: string,
-    image: string,
-    name: string,
-    symbol: string,
     amount: number,
-    valueUSD: number, 
+    coin: {
+      id: string,
+      image: string,
+      name: string,
+      symbol: string,
+      currentPrice: number, 
+    }
   }
 }
 
 const PortfolioCoin = (props: PortfolioCoinProps) => {
   const {
     portfolioCoin: {
-      id,
-      image, 
-      name, 
-      symbol, 
-      amount, 
-      valueUSD
+      
+      amount,
+      coin: {
+        id,
+        image, 
+        name, 
+        symbol, 
+        currentPrice,
+      }
     }, 
   } = props;
 
@@ -39,7 +44,7 @@ const PortfolioCoin = (props: PortfolioCoinProps) => {
         </View>
       </View>
       <View style={{alignItems: 'flex-end'}}>
-        <Text style={styles.valueUSD}>${valueUSD}</Text>
+        <Text style={styles.valueUSD}>${amount * currentPrice}</Text>
         <Text style={styles.amount}>{symbol} {amount}</Text>
       </View>
     </Pressable>

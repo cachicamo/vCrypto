@@ -1,4 +1,4 @@
-type User @model{
+type User @model(mutations: null){
   id: ID!
   email: String!
   name: String!
@@ -32,4 +32,14 @@ type PortfolioCoin
  
   coinId: ID!
   coin: Coin @connection(fields: ["coinId"])
+}
+
+type Mutation {
+  ExchangeCoins(
+    coinId: ID, 
+    isBuy: Boolean!, 
+    amount: Float!,
+    usdPortfolioCoinId: ID
+    coinPortfolioCoinId: ID
+  ): Boolean! @function(name: "ExchangeCoins-${env}")
 }
