@@ -25,6 +25,10 @@
         "exchangeMyCoin": {
           "deploymentBucketName": "amplify-vcrypto-dev-75713-deployment",
           "s3Key": "amplify-builds/exchangeMyCoin-34437370365452596c69-build.zip"
+        },
+        "FetchCoinsPrices": {
+          "deploymentBucketName": "amplify-vcrypto-dev-75713-deployment",
+          "s3Key": "amplify-builds/FetchCoinsPrices-2f336f454a396a2b6e64-build.zip"
         }
       }
     }

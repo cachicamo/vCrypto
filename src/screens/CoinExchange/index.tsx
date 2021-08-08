@@ -214,7 +214,6 @@ const CoinExchangeScreen = () => {
         {!(coinAmount.length > 0) && (
           <View></View>
         )}
-       {console.log('max:',coin)}
         <Text>Max. {isBuy ? usdPortfolioCoin?.amount : portfolioCoin.amount.toFixed(8) || 0}</Text>
       </View>
       {isBuy ? (
