@@ -34,7 +34,7 @@ const Rankings = (props: RankingsProps) => {
         </View>
       </View>
       <View style={{alignItems: 'flex-end'}}>
-        <Text style={styles.netWorth}>${netWorth}</Text>
+        <Text style={styles.netWorth}>${netWorth.toFixed(2)}</Text>
       </View>
     </View>
   )

@@ -34,6 +34,9 @@ const PortfolioCoin = (props: PortfolioCoinProps) => {
 
   const navigation = useNavigation();
 
+  // do not show coin with 0 amount
+  if (amount === 0) return null;
+
   return (
     <Pressable onPress={() => navigation.navigate('CoinDetails', { id })} style={styles.root}>
       <View style={styles.leftContainer}>
@@ -44,8 +47,8 @@ const PortfolioCoin = (props: PortfolioCoinProps) => {
         </View>
       </View>
       <View style={{alignItems: 'flex-end'}}>
-        <Text style={styles.valueUSD}>${amount * currentPrice}</Text>
-        <Text style={styles.amount}>{symbol} {amount}</Text>
+        <Text style={styles.valueUSD}>${(amount * currentPrice).toFixed(2)}</Text>
+        <Text style={styles.amount}>{symbol} {symbol === 'USD' ? amount.toFixed(2) : amount.toFixed(6)}</Text>
       </View>
     </Pressable>
   )

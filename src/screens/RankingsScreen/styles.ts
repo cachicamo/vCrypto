@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   image: {
     height: 175,
     resizeMode: 'contain',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   label: {
     fontSize: 18,

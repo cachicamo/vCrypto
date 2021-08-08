@@ -43,7 +43,9 @@ const CoinExchangeScreen = () => {
   };
 
   const onSellAll = () => {
-    setCoinAmount((portfolioCoin.amount).toString());
+    if(portfolioCoin?.amount) {
+      setCoinAmount((portfolioCoin?.amount).toString());
+    }
   }
 
   const onBuyAll = () => {
@@ -58,8 +60,8 @@ const CoinExchangeScreen = () => {
       onClear();
       return;
     }
-    if(!isBuy && coinAmount > portfolioCoin.amount) {
-      Alert.alert('Error', `Not enough ${coin.symbol} coins. Max: ${portfolioCoin.amount || 0}`);
+    if(!isBuy && coinAmount > (portfolioCoin?.amount || 0)) {
+      Alert.alert('Error', `Not enough ${coin.symbol} coins. Max: ${portfolioCoin?.amount || 0}`);
       hideKeyboard();
       onClear();
       return;
@@ -214,7 +216,7 @@ const CoinExchangeScreen = () => {
         {!(coinAmount.length > 0) && (
           <View></View>
         )}
-        <Text>Max. {isBuy ? usdPortfolioCoin?.amount : portfolioCoin.amount.toFixed(8) || 0}</Text>
+        <Text>Max. {isBuy ? usdPortfolioCoin?.amount : portfolioCoin?.amount.toFixed(8) || 0}</Text>
       </View>
       {isBuy ? (
         <Pressable onPress={onBuyAll}>

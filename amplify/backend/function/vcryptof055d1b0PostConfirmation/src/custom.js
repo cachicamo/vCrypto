@@ -60,6 +60,7 @@ exports.handler = async (event, context) => {
   } catch (e) {
     console.log('Error', e);
   }
+  
+  if(context?.done) context.done(null, event)
  
-  context.done(null, event);
 };

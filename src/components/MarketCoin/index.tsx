@@ -40,8 +40,8 @@ const MarketCoin = (props: MarketCoinProps) => {
         </View>
       </View>
       <View style={{alignItems: 'flex-end'}}>
-        <Text style={styles.valueUSD}>${currentPrice}</Text>
-        <PercentageChange value={valueChange24H} />
+        <Text style={styles.valueUSD}>${currentPrice.toFixed(2)}</Text>
+        <PercentageChange value={valueChange24H.toFixed(2)} />
         {/* <Text 
           style={{
             color: valueChange24H < 0 ? '#f10000' : valueChange24H > 0 ? '#398f0a' : '#000000'

@@ -4,6 +4,7 @@
     "jsx": "react",
     "jsx": "react",
     "jsx": "react",
-    "strict": true
+    "strict": true,
+    "esModuleInterop": true,
   }
 }

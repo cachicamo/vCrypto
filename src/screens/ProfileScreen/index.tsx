@@ -54,7 +54,7 @@ const ProfileScreen = () => {
           </View>
         </View>
         <View style={{alignItems: 'flex-end'}}>
-          <Text style={styles.netWorth}>${user?.netWorth}</Text>
+          <Text style={styles.netWorth}>${user?.netWorth.toFixed(2)}</Text>
         </View>
       </View>
       <Pressable onPress={signOut} style={styles.signOut}>
