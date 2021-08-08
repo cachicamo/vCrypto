@@ -8,7 +8,8 @@ type User @model(mutations: null){
   porfolioCoins: [PortfolioCoin] @connection(keyName: "byUser", fields: ["id"])
 }
 
-type Coin @model(mutations: null) {
+type Coin @model(mutations: null)
+{
   id: ID!
   cgId: String!
   name: String!

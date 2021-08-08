@@ -99,7 +99,9 @@ const MarketScreen = () => {
   const fetchCoins = async () => {
     try {
       setLoading(true);
-      const response = await API.graphql(graphqlOperation(listCoins));
+      const response = await API.graphql(graphqlOperation(
+        listCoins
+        ));
       setCoins(response.data.listCoins.items);
     } catch (e) {
       console.error(e);
@@ -110,6 +112,21 @@ const MarketScreen = () => {
   useEffect(() => {
    fetchCoins();
   }, [])
+
+  // sort by name
+  coins.sort(function(a, b) {
+    var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+    var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  });
 
   return (
     <View style={styles.root}>

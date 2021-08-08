@@ -33,7 +33,7 @@ const CoinPriceGraph = ({ dataString }: CoinPriceGraphProps) => {
     width={Dimensions.get("window").width -30} // from react-native
     height={220}
     yAxisLabel="$"
-    yAxisSuffix="k"
+    yAxisSuffix=""
     yAxisInterval={1} // optional, defaults to 1
     withOuterLines={false}
     withInnerLines={false}
