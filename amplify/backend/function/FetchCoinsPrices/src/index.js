@@ -61,9 +61,12 @@ exports.handler = async (event, context) => {
         context.done(null, event);
     }
 
+    // console.log('Invoking Networth', process.env.NET_WORTH_CALCULATOR_FUNCTION)
+
     // lambda.invoke({
     //     FunctionName: process.env.NET_WORTH_CALCULATOR_FUNCTION,
     //     InvocationType: "Event"
     // }).send();
+
     context.done(null, event);
 };

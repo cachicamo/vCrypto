@@ -28,7 +28,11 @@
         },
         "FetchCoinsPrices": {
           "deploymentBucketName": "amplify-vcrypto-dev-75713-deployment",
-          "s3Key": "amplify-builds/FetchCoinsPrices-6a735977564b50767839-build.zip"
+          "s3Key": "amplify-builds/FetchCoinsPrices-444268766e436f664f4d-build.zip"
+        },
+        "NetWorthCalculator": {
+          "deploymentBucketName": "amplify-vcrypto-dev-75713-deployment",
+          "s3Key": "amplify-builds/NetWorthCalculator-6c664257736758674354-build.zip"
         }
       }
     }

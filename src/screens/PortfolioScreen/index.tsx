@@ -70,7 +70,7 @@ const PortfolioScreen = () => {
             <Image style={styles.image} source={image} />
             <View style={styles.balanceContainer}>
               <Text style={styles.label} >Portfolio balance</Text>
-              <Text style={styles.balance} >${balance}</Text>
+              <Text style={styles.balance} >${balance.toFixed(2)}</Text>
             </View>
           </>
         )}
